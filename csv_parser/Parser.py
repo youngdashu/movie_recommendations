@@ -6,7 +6,12 @@ from sqlalchemy.orm import Session
 from db.Connection import Connection
 from models.Movie import Movie, Genre
 from models.Rating import Rating
+from models.Tag import Tag
 from models.User import User
+
+from datetime import datetime
+
+import pandas as pd
 
 
 def parse_file(name: str, read_lines):
@@ -35,11 +40,14 @@ def movies_and_genres(csv_reader, session: Session):
 
         session.add(movie)
 
-def ratings(csv_reader, session: Session):
-    for line in csv_reader:
-        (user_id, movie_id, rating, timestamp) = line
-        rating = Rating(user_id=int(user_id), movie_id=int(movie_id), timestamp=timestamp)
-        session.add(rating)
+def ratings(file_name):
+    csv_file = pd.read_csv(file_name)
+    connection = Connection()
+    with Session(connection.engine) as session:
+        for r in csv_file:
+            print(r)
+            return
+
 
 
 
@@ -52,11 +60,20 @@ def users():
             print(user_count)
             session.add_all(tuple(User() for _ in range(user_count)))
             session.commit()
+    print(datetime.now())
+
+
+def tags(csv_reader, session: Session):
+    for line in csv_reader:
+        (user_id, movie_id, tag, timestamp) = line
+        tag = Tag(user_id=int(user_id), movie_id=int(movie_id), name=tag, timestamp=timestamp)
+        session.add(tag)
 
 def main():
-    users()
-    parse_file('movies.csv', movies_and_genres)
-    parse_file('ratings.csv', ratings)
+    # users()
+    # parse_file('movies.csv', movies_and_genres)
+    # parse_file('tags.csv', tags)
+    ratings('../ml-latest/' + 'ratings.csv')
 
 
 
