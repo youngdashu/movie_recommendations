@@ -12,4 +12,5 @@ class Tag(Base):
     user: Mapped["User"] = relationship(back_populates="tags")
     movie_id: Mapped[int] = mapped_column(ForeignKey("movie.id"))
     movie: Mapped["Movie"] = relationship(back_populates="tags")
-    name: Mapped[str] = mapped_column(String(40))
+    name: Mapped[str] = mapped_column(String(300))
+    timestamp: Mapped[str]
