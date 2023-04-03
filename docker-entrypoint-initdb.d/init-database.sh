@@ -111,6 +111,9 @@ INSERT INTO public.genre (id, name) VALUES (19, 'IMAX');
 
 EOSQL
 
+git fetch
+git pull
+
 mv ../ml-latest .
 
 ls
