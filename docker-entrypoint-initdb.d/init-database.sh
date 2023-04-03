@@ -5,4 +5,4 @@ ls
 echo "test"
 
 
-python3 ../db/seed.py
+python3 /seed.py
