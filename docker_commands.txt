@@ -1,6 +1,6 @@
 Budowanie obrazu:
 
-docker build . -t movie:db --no-cache
+docker build . -t movie:db2 --no-cache
 
 Uruchomienie:
 

@@ -1,5 +1,9 @@
 #!/bin/bash
+
+
+
 set -e
+
 
 psql -v ON_ERROR_STOP=1 --username "$POSTGRES_USER" --dbname "$POSTGRES_DB" <<-EOSQL
   create table if not exists public.user_account
@@ -106,3 +110,9 @@ INSERT INTO public.genre (id, name) VALUES (18, 'Western');
 INSERT INTO public.genre (id, name) VALUES (19, 'IMAX');
 
 EOSQL
+
+mv ../ml-latest .
+
+ls
+
+python3 docker_start.py
