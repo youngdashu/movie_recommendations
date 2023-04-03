@@ -1,0 +1,11 @@
+Budowanie obrazu:
+
+docker build . -t movie:db --no-cache
+
+Uruchomienie:
+
+docker-compose up
+
+Usuwanie kontenera:
+
+docker compose down --volumes

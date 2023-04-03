@@ -5,8 +5,7 @@ from db import Connection
 from models.Base import Base
 from models.Movie import Genre
 
-
-def main():
+if __name__ == '__main__':
     connection = Connection()
     Base.metadata.drop_all(connection.engine)
     Base.metadata.create_all(connection.engine)
@@ -46,8 +45,3 @@ def main():
         )
 
         session.commit()
-
-
-if __name__ == "__main__":
-    print("start")
-    main()

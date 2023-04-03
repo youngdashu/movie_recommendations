@@ -16,3 +16,4 @@ class Rating(Base):
     movie_id: Mapped[int] = mapped_column(ForeignKey("movie.id"))
     movie: Mapped["Movie"] = relationship(back_populates="ratings")
     timestamp: Mapped[str]
+    rating: Mapped[float]
