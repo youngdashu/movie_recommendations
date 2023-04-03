@@ -21,6 +21,6 @@ COPY ml-latest.zip .
 RUN unzip ml-latest.zip
 RUN rm ml-latest.zip
 
-RUN python3 db/seed.py
+RUN python3 docker_start.py
 
 CMD ["-p", "5440"]
