@@ -11,7 +11,7 @@ RUN git clone https://github.com/youngdashu/movie_recommendations.git
 WORKDIR movie_recommendations
 RUN git checkout finish_parsers
 
-RUN pip -r requiremnts.txt
+RUN pip -r requirements.txt
 
 #assumes You have proper zip in working dir
 COPY ml-latest.zip .
