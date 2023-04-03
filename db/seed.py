@@ -1,17 +1,9 @@
-from sqlalchemy import select, delete, insert
+from sqlalchemy import delete, insert
 from sqlalchemy.orm import Session
 
-from db.Connection import Connection
+from db import Connection
 from models.Base import Base
-
-from models.Movie import Movie, Genre
-from models.Rating import Rating
-from models.User import User
-from models.Link import Link
-from models.Tag import Tag
-
-
-# from models.Movie import Genre
+from models.Movie import Genre
 
 
 def main():
@@ -20,7 +12,6 @@ def main():
     Base.metadata.create_all(connection.engine)
     with Session(connection.engine) as session:
         session.execute(delete(Genre))
-
 
     with Session(connection.engine) as session:
         genre_names = [
