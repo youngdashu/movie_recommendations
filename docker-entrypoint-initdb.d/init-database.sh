@@ -1,3 +1,3 @@
 
 
-python3 ./db/seed.py
+python3 docker_start.py

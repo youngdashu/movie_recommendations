@@ -23,6 +23,5 @@ RUN rm ml-latest.zip
 
 ENV PYTHONPATH /movie_recommendations/db
 
-RUN python3 docker_start.py
 
 CMD ["-p", "5440"]
