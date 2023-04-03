@@ -1,8 +1,3 @@
 
-ls
 
-
-echo "test"
-
-
-python3 /seed.py
+python3 /db/seed.py
