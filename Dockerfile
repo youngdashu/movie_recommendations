@@ -21,7 +21,7 @@ RUN git checkout container_db_init_sql_to_py
 RUN pip3 install -r requirements.txt
 
 
-ENV PYTHONPATH /movie_recommendations/db
+ENV PYTHONPATH .
 
 
 CMD ["-p", "5440"]

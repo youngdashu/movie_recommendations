@@ -13,7 +13,6 @@ from datetime import datetime
 
 import pandas as pd
 
-from db.seed import main as seed_main
 
 
 def parse_file(name: str, read_lines):
@@ -88,4 +87,5 @@ def main():
 
 if __name__ == "__main__":
     # seed_main()
-    main()
+    print("dupa")
+    # main()
