@@ -1,4 +1,5 @@
 import csv
+import os
 
 from sqlalchemy import select
 from sqlalchemy.orm import Session
@@ -13,11 +14,9 @@ from datetime import datetime
 
 import pandas as pd
 
-from db.seed import main as seed_main
 
-
-def parse_file(name: str, read_lines):
-    with open('../ml-latest/' + name) as f:
+def parse_file(path: str, read_lines):
+    with open(path) as f:
         connection = Connection()
         with Session(connection.engine) as session:
             csv_reader = csv.reader(f)
@@ -42,6 +41,7 @@ def movies_and_genres(csv_reader, session: Session):
 
         session.add(movie)
 
+
 def ratings(file_name):
     print("Ratings")
     df = pd.read_csv(file_name)
@@ -58,11 +58,9 @@ def ratings(file_name):
         session.commit()
 
 
-
-
-def users():
+def users(path):
     print("Users")
-    with open('../ml-latest/ratings.csv') as f:
+    with open(path) as f:
         connection = Connection()
         with Session(connection.engine) as session:
             last_line = f.readlines()[-1]
@@ -78,14 +76,15 @@ def tags(csv_reader, session: Session):
         tag = Tag(user_id=int(user_id), movie_id=int(movie_id), name=tag, timestamp=timestamp)
         session.add(tag)
 
-def main():
-    # users()
-    # parse_file('movies.csv', movies_and_genres)
-    # parse_file('tags.csv', tags)
-    ratings('../ml-latest/' + 'ratings.csv')
 
+def main():
+    path_base = './ml-latest/' if os.environ.get('IS_DOCKER', False) else '../ml-latest/'
+
+    users('%sratings.csv' % path_base)
+    parse_file('%smovies.csv' % path_base, movies_and_genres)
+    parse_file('%stags.csv' % path_base, tags)
+    ratings('%sratings.csv' % path_base)
 
 
 if __name__ == "__main__":
-    # seed_main()
     main()
