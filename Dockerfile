@@ -29,6 +29,7 @@ RUN chmod -R a+rwX ./
 
 
 ENV PYTHONPATH .
+ENV IS_DOCKER Yes
 
 
 CMD ["-p", "5440"]
