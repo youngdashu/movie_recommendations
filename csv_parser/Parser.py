@@ -78,14 +78,12 @@ def tags(csv_reader, session: Session):
         session.add(tag)
 
 def main():
-    # users()
+    users()
     # parse_file('movies.csv', movies_and_genres)
     # parse_file('tags.csv', tags)
-    ratings('../ml-latest/' + 'ratings.csv')
+    # ratings('../ml-latest/' + 'ratings.csv')
 
 
 
 if __name__ == "__main__":
-    # seed_main()
-    print("dupa")
-    # main()
+    main()
