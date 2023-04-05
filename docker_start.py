@@ -1,7 +1,7 @@
 from sqlalchemy import delete, insert
 from sqlalchemy.orm import Session
 
-from db import Connection
+from db.Connection import Connection
 from models.Base import Base
 from models.Movie import Genre
 

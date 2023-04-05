@@ -111,10 +111,14 @@ INSERT INTO public.genre (id, name) VALUES (19, 'IMAX');
 
 EOSQL
 
+ls
+whoami
+git config pull.rebase false
+git config --global --add core.sharedRepository group
+git config --global --add safe.directory /movie_recommendations
 git fetch
 git pull
 
-mv ../ml-latest .
 
 ls
 

@@ -13,12 +13,19 @@ RUN python3 -m pip install --upgrade pip
 COPY ml-latest.zip .
 RUN unzip ml-latest.zip
 RUN rm ml-latest.zip
+RUN chmod -R a+rwX ml-latest
+RUN chmod a+rwX .
+
 
 RUN git clone https://github.com/youngdashu/movie_recommendations.git
 WORKDIR movie_recommendations
 RUN git checkout container_db_init_sql_to_py
 
 RUN pip3 install -r requirements.txt
+
+RUN mv ../ml-latest .
+
+RUN chmod -R a+rwX ./
 
 
 ENV PYTHONPATH .
