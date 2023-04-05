@@ -1,4 +1,5 @@
 import csv
+import os
 
 from sqlalchemy import select
 from sqlalchemy.orm import Session
@@ -86,4 +87,5 @@ def main():
 
 
 if __name__ == "__main__":
+    print(os.getcwd())
     main()
