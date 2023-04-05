@@ -8,7 +8,7 @@ from models.Movie import Genre
 import sys
 
 if __name__ == '__main__':
-    connection = Connection(int(sys.argv[1]) if len(sys.argv) > 1 else 5440)
+    connection = Connection()
     Base.metadata.drop_all(connection.engine)
     Base.metadata.create_all(connection.engine)
     with Session(connection.engine) as session:

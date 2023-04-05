@@ -119,4 +119,4 @@ git pull
 
 
 python3 docker_start.py 5432
-python3 csv_parser/Parser.py
+python3 csv_parser/Parser.py 5432
