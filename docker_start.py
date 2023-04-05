@@ -5,8 +5,10 @@ from db.Connection import Connection
 from models.Base import Base
 from models.Movie import Genre
 
+import sys
+
 if __name__ == '__main__':
-    connection = Connection()
+    connection = Connection(int(sys.argv[1]) if sys.argc > 1 else 5440)
     Base.metadata.drop_all(connection.engine)
     Base.metadata.create_all(connection.engine)
     with Session(connection.engine) as session:

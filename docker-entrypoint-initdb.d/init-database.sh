@@ -118,4 +118,4 @@ git fetch
 git pull
 
 
-python3 docker_start.py
+python3 docker_start.py 5432
