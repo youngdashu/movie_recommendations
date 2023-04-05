@@ -15,7 +15,6 @@ from datetime import datetime
 import pandas as pd
 
 
-
 def parse_file(path: str, read_lines):
     with open(path) as f:
         connection = Connection()
@@ -42,6 +41,7 @@ def movies_and_genres(csv_reader, session: Session):
 
         session.add(movie)
 
+
 def ratings(file_name):
     print("Ratings")
     df = pd.read_csv(file_name)
@@ -56,8 +56,6 @@ def ratings(file_name):
                 print(int(float(row.Index) / float(row_count) * 100), ' %')
                 session.commit()
         session.commit()
-
-
 
 
 def users(path):
@@ -78,15 +76,14 @@ def tags(csv_reader, session: Session):
         tag = Tag(user_id=int(user_id), movie_id=int(movie_id), name=tag, timestamp=timestamp)
         session.add(tag)
 
-def main():
 
+def main():
     path_base = './ml-latest/' if os.environ.get('IS_DOCKER', False) else '../ml-latest/'
 
     users('%sratings.csv' % path_base)
-    # parse_file('%smovies.csv' % path_base, movies_and_genres)
-    # parse_file('%stags.csv' % path_base, tags)
-    # ratings('%sratings.csv' % path_base)
-
+    parse_file('%smovies.csv' % path_base, movies_and_genres)
+    parse_file('%stags.csv' % path_base, tags)
+    ratings('%sratings.csv' % path_base)
 
 
 if __name__ == "__main__":
