@@ -16,8 +16,8 @@ import pandas as pd
 
 
 
-def parse_file(name: str, read_lines):
-    with open('../ml-latest/' + name) as f:
+def parse_file(path: str, read_lines):
+    with open(path) as f:
         connection = Connection()
         with Session(connection.engine) as session:
             csv_reader = csv.reader(f)
@@ -60,9 +60,9 @@ def ratings(file_name):
 
 
 
-def users():
+def users(path):
     print("Users")
-    with open('../ml-latest/ratings.csv') as f:
+    with open(path) as f:
         connection = Connection()
         with Session(connection.engine) as session:
             last_line = f.readlines()[-1]
@@ -79,13 +79,15 @@ def tags(csv_reader, session: Session):
         session.add(tag)
 
 def main():
-    users()
-    # parse_file('movies.csv', movies_and_genres)
-    # parse_file('tags.csv', tags)
-    # ratings('../ml-latest/' + 'ratings.csv')
+
+    path_base = './ml-latest/' if os.environ.get('IS_DOCKER', False) else '../ml-latest/'
+
+    users('%sratings.csv' % path_base)
+    # parse_file('%smovies.csv' % path_base, movies_and_genres)
+    # parse_file('%stags.csv' % path_base, tags)
+    # ratings('%sratings.csv' % path_base)
 
 
 
 if __name__ == "__main__":
-    print(os.getcwd())
     main()
