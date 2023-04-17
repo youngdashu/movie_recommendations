@@ -9,19 +9,27 @@ RUN apt-get install unzip -y
 
 RUN python3 -m pip install --upgrade pip
 
-
-RUN git clone https://github.com/youngdashu/movie_recommendations.git
-WORKDIR movie_recommendations
-RUN git checkout finish_parsers
-
-RUN pip3 install -r requirements.txt
-
 #assumes You have proper zip in working dir
 COPY ml-latest.zip .
 RUN unzip ml-latest.zip
 RUN rm ml-latest.zip
+RUN chmod -R a+rwX ml-latest
+RUN chmod a+rwX .
 
-ENV PYTHONPATH /movie_recommendations/db
+
+RUN git clone https://github.com/youngdashu/movie_recommendations.git
+WORKDIR movie_recommendations
+RUN git checkout container_db_init_sql_to_py
+
+RUN pip3 install -r requirements.txt
+
+RUN mv ../ml-latest .
+
+RUN chmod -R a+rwX ./
+
+
+ENV PYTHONPATH .
+ENV IS_DOCKER Yes
 
 
 CMD ["-p", "5440"]
