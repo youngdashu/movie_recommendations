@@ -20,10 +20,10 @@ class ContentBasedModel:
         self.transformed = vectorizer.fit_transform(self.common_utils.combined['combined_genres_tags'])
         self.cosine_sim = linear_kernel(self.transformed)
 
-    def get_similar(self, title, n=10):
+    def get_similar(self, title, n=10, verbose=True):
         movies = self.common_utils.movies
 
-        idx = movies[movies['title'] == title].index[0]
+        idx = self.common_utils.get_movie_id_by_title(title)
         queried_movie = movies.iloc[idx]
 
         index_score = list(enumerate(self.cosine_sim[idx]))
@@ -34,8 +34,9 @@ class ContentBasedModel:
         fig, ax = plt.subplots(math.ceil(n / 5), 5, layout="compressed", figsize=(10, 8))
         axes = ax.flat
 
-        print(
-            f'Propozycje dla: {queried_movie.title} ({queried_movie.genres}) ({self.common_utils.get_tags_for_movie(queried_movie["movieId"])})')
+        if verbose:
+            print(
+                f'Propozycje dla: {queried_movie.title} ({queried_movie.genres}) ({self.common_utils.get_tags_for_movie(queried_movie["movieId"])})')
 
         i = 0
         for (top_idx, similarity) in top_10:
@@ -44,11 +45,13 @@ class ContentBasedModel:
             similarity = "{:.3f}".format(similarity)
             row_tags = ', '.join(self.common_utils.get_tags_for_movie(row_movie['movieId']))
 
-            print(f'{row_movie.title}, cosine_sim: {similarity}')
-            print(f'  > Gatunki: {row_movie.genres}')
-            print(f'  > Tagi: {row_tags}')
+            if verbose:
+                print(f'{row_movie.title}, cosine_sim: {similarity}')
+                print(f'  > Gatunki: {row_movie.genres}')
+                print(f'  > Tagi: {row_tags}')
 
             axes[i].imshow(self.common_utils.get_poster_for_movie(row_movie['movieId']), aspect='auto')
             i += 1
 
         plt.savefig('contentbased_posters.png')
+        return top_10

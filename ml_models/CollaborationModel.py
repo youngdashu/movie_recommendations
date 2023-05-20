@@ -15,7 +15,8 @@ class CollaborationModel:
                                          reader=Reader(rating_scale=(1, 5)))
 
         trainset = self.data.build_full_trainset()
-        self.algo.train(trainset)
+        self.algo = SVD()
+        self.algo.fit(trainset)
 
     def get_prediction(self, user_id, movie_id):
-        self.algo.predict(user_id, movie_id)
+        return self.algo.predict(user_id, movie_id)

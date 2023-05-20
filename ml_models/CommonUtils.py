@@ -75,3 +75,15 @@ class CommonUtils:
         tmdb_id = self.links[self.links['movieId'] == movie_id]['tmdbId'].iloc[0]
 
         return self.get_poster_base64(tmdb_id)
+
+    def get_movie_id_by_title(self, title):
+        try:
+            idx = self.movies[self.movies['title'] == title].index[0]
+        except IndexError:
+            print("Wrong title.")
+            exit()
+
+        return idx
+
+    def get_title_by_movie_id(self, movie_id):
+        return self.movies.iloc[movie_id].title
