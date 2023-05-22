@@ -8,7 +8,6 @@ class CollaborationModel:
     data = None
     algo = None
 
-    # TODO: test/train split uwzględnić nwm by nie predyktować dla istniejących ocen w train secie albo to jebac i wytrenowac na calym secie
     def __init__(self, common_utils: CommonUtils):
         self.common_utils = common_utils
         self.data = Dataset.load_from_df(self.common_utils.ratings[['userId', 'movieId', 'rating']],
